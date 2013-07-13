@@ -10,11 +10,11 @@ var URL_DEFAULT = "http://lit-atoll-3007.herokuapp.com";
 var pagedata;
 var assertURLExists = function(inurl) {
     var instr = inurl;
-   // if(instr.length<10) {
-     //   console.log("%s does not exist. Exiting.", instr);
-       // process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code
-    //}
-      //pagedata=rest.get(inurl);
+    if(instr.length<5) {
+        console.log("%s does not exist. Exiting.", instr);
+        process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code
+   }
+   ;
   
 return instr;
 };
@@ -45,7 +45,7 @@ var loadChecks = function(checksfile) {
 };
 
 var checkHtmlFile = function(checksfile,htmlfile,url) {
-//    $ = cheerioHtmlFile(htmlfile);
+    $ = cheerioHtmlFile(htmlfile);
       $ = cheerioURL(url);
 var checks = loadChecks(checksfile).sort();
     var out = {};
