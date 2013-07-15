@@ -43,16 +43,24 @@ var checkUrl = function(checksfile,url){
 if (result instanceof Error){sys.puts("error: " + result.message);}
 else{
        console.log ("completed getting page, URL is " + url + "checksfile is " + checksfile);	    
-	$=cheerio.load(result).html();
-	console.log ("completed cheerification "  );
+  cheerified = cheerio.load(result).html();
+//	console.log ("completed cheerification " + cheerified  );
+var cheerioURL = function(result) {
+//    console.log ("in cheerioURL, result is" + result);
+    return cheerio.load(result).html();
+}
+
 //var unsortedchecks = JSON.parse(fs.readFileSync(checksfile));
 //console.log(" unsorted checks is " + unsortedchecks);
 
 var checks = (JSON.parse(fs.readFileSync(checksfile)).sort());
 console.log(" sorted checks variable is " + checks);
 var out = {};
+cheery = cheerioURL(result);
+console.log("cheery is " );
 for(var ii in checks) {
-   var present = $(checks[ii]).length > 0;
+	  
+   var present = cheery(checks[ii]).length > 0;
    out[checks[ii]] = present;
 }
  return out;
